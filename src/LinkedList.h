@@ -32,8 +32,8 @@ class LinkedList{
 		virtual T& search(T& item);
 		void insertLast(T& item);
 		virtual void deleteNode(T& item);
-		void destroy();
-//		~LinkedList();
+		virtual void destroy();
+		virtual ~LinkedList();
 
 };
 template <class T>
@@ -109,8 +109,8 @@ void LinkedList<T>::deleteNode(T& item){
 }
 template<class T>
 void LinkedList<T>::destroy(){
-	node<T>& p = head;
-	node<T>& temp = p->next;
+	node<T>* p = head;
+	node<T>* temp = p->next;
 
 	for(int i = 0; i < count; i++){
 		delete p;

@@ -12,7 +12,7 @@
 
 template<class T>
 class OrderedLinkedList: public LinkedList<T>{
-	node<T>* head, last;
+	node<T>* head, *last;
 	int count;
 public:
 	OrderedLinkedList();
@@ -51,8 +51,8 @@ void OrderedLinkedList<T>::insertNode(T& item){
 		head = p;
 		count++;
 	}
-	else if(item >= last.data){
-		last.next = p;
+	else if(item >= last->data){
+		last->next = p;
 		last = p;
 		count++;
 	}

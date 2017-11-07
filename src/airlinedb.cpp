@@ -37,6 +37,10 @@ void mainMenu(){
 	string flight;
 	string first;
 	string last;
+	Passenger pasSearch;
+	Passenger pasFound;
+	int flightNum = 0;
+	Passenger nullObject;
 
 	cout<<"A(Add) | S (Search) | D(Delete) |L(List) |Q(Quit):"<<endl;
 	cin>>input;
@@ -74,28 +78,25 @@ void mainMenu(){
 			cout<<"Enter last name: ";
 			cin>>last;
 
-			Passenger pasSearch;
 			pasSearch.setFirst(first);
 			pasSearch.setLast(last);
-			Passenger pasFound;
-			int flightNum = 0;
 
 			pasFound = one.search(pasSearch);
 
-			if(pasFound != NULL){
+			if(pasFound != nullObject){
 				flightNum = 100;
 				break;
 			} else
 			{
 				pasFound = two.search(pasSearch);
 			}
-			if((pasFound != NULL) && (flightNum == 0)){
+			if((pasFound != nullObject) && (flightNum == 0)){
 				flightNum = 200;
 				break;
 			} else{
 				pasFound = three.search(pasSearch);
 			}
-			if(pasFound != NULL && flightNum == 0){
+			if(pasFound != nullObject && flightNum == 0){
 				flightNum = 300;
 				break;
 			} else{
@@ -103,7 +104,7 @@ void mainMenu(){
 				flightNum = 400;
 			}
 
-			if(pasFound == NULL){
+			if(pasFound == nullObject){
 				cout<<"Cannot find passenger on any flight.";
 			}
 			else{
@@ -176,6 +177,10 @@ void mainMenu(){
 			break;
 		case 'Q':
 		case 'q':
+			one.destroy();
+			two.destroy();
+			three.destroy();
+			four.destroy();
 			break;
 		}
 
