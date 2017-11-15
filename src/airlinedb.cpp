@@ -66,7 +66,7 @@ void mainMenu(){
 				addPas(four);
 			}
 			else
-				cout<<"Invalid input";
+				cout<<"Invalid input"<<endl;
 
 			flight.clear();
 
@@ -177,10 +177,10 @@ void mainMenu(){
 			break;
 		case 'Q':
 		case 'q':
-			one.destroy();
+			/*one.destroy();
 			two.destroy();
 			three.destroy();
-			four.destroy();
+			four.destroy();*/
 			break;
 		}
 
@@ -188,6 +188,11 @@ void mainMenu(){
 		cin>>input;
 
 	}while(input != 'Q' && input != 'q');
+
+	one.destroy();
+	two.destroy();
+	three.destroy();
+	four.destroy();
 }
 
 //adds a passenger to one of the linked lists

@@ -33,7 +33,7 @@ class LinkedList{
 		void insertLast(T& item);
 		virtual void deleteNode(T& item);
 		virtual void destroy();
-		virtual ~LinkedList();
+		~LinkedList() {destroy();}
 
 };
 template <class T>
@@ -72,7 +72,7 @@ void LinkedList<T>::insertLast(T& item){
 }
 template<class T>
 T& LinkedList<T>::search(T& item){
-	node<T> p = head;
+	node<T>* p = head;
 
 	for(int i = 0; i < count; i++){
 		if(p->data == item){

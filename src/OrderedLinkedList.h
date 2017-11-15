@@ -12,10 +12,8 @@
 
 template<class T>
 class OrderedLinkedList: public LinkedList<T>{
-	node<T>* head, *last;
-	int count;
 public:
-	OrderedLinkedList();
+	OrderedLinkedList(){}
 	T& search(T& item) override;
 	void insertNode(T& item);
 	void deleteNode(T& item);
@@ -24,17 +22,17 @@ public:
 
 template<class T>
 T& OrderedLinkedList<T>::search(T& item){
-	node<T>* p = head;
-
-	for(int i = 0; i < count; i++){
-		if(p->data > item)
+	node<T>* p = this->head;
+	for(int i = 0; i < this->count; i++){
+		if(p->data > item){
 			break;
-		if(p->data == item){
+		}if(p->data == item){
 			return p->data;
 		}
 		else
 			p = p->next;
 	}
+	return p->data;
 }
 
 template<class T>
@@ -42,28 +40,28 @@ void OrderedLinkedList<T>::insertNode(T& item){
 	node<T>* p;
 	p->data = item;
 
-	if(count == 0){
-		head = p;
-		count++;
+	if(this->count == 0){
+		this->head = p;
+		this->count++;
 	}
-	if(item <= head->data){
-		p->next = head;
-		head = p;
-		count++;
+	if(item <= this->head->data){
+		p->next = this->head;
+		this->head = p;
+		this->count++;
 	}
-	else if(item >= last->data){
-		last->next = p;
-		last = p;
-		count++;
+	else if(item >= this->last->data){
+		this->last->next = p;
+		this->last = p;
+		this->count++;
 	}
 	else{
-		node<T>* temp = head;
-		for(int i = 0; i < count-1; i++){
+		node<T>* temp = this->head;
+		for(int i = 0; i < this->count-1; i++){
 			if((temp->next->data >= item) &&
 					(temp->data < item)){
 				p->next = temp->next;
 				temp->next = p;
-				count++;
+				this->count++;
 			}
 			else
 				temp = temp->next;
@@ -73,25 +71,25 @@ void OrderedLinkedList<T>::insertNode(T& item){
 
 template<class T>
 void OrderedLinkedList<T>::deleteNode(T& item){
-	node<T>* p = head;
+	node<T>* p = this->head;
 
-	if(count == 0){
+	if(this->count == 0){
 		cout<<"Item does not exist."<<endl;
 	}
-	else if(head->data == item){
-		head = p->next;
+	else if(this->head->data == item){
+		this->head = p->next;
 		delete p;
-		count--;
+		this->count--;
 	}
 	else{
-		for(int i = 0; i < count-1; i++){
+		for(int i = 0; i < this->count-1; i++){
 			if(p->next->data == item){
 				node<T>* temp = p->next;
 				p->next = p->next->next;
 				delete temp;
-				count--;
+				this->count--;
 			}
-			else if(i == count -1){
+			else if(i == this->count -1){
 				cout<<"Item does not exist."<<endl;
 			}
 		}
@@ -100,8 +98,8 @@ void OrderedLinkedList<T>::deleteNode(T& item){
 
 template<class T>
 void OrderedLinkedList<T>::listNodes(){
-	node<T>* p = head;
-	for(int i = 0; i < count; i++){
+	node<T>* p = this->head;
+	for(int i = 0; i < this->count; i++){
 		cout<<p->data;
 		p = p->next;
 	}
