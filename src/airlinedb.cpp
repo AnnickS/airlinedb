@@ -18,7 +18,7 @@ void addPas(OrderedLinkedList<Passenger>&);
 
 int main() {
 
-	cout<<"***DELTA AITLINES ***"<<endl;
+	cout<<"***DELTA AIRLINES ***"<<endl;
 	cout<<"Please choose an operation:"<<endl;
 
 	mainMenu();
@@ -226,6 +226,7 @@ void addPas(OrderedLinkedList<Passenger>& list){
 	cout<<"Enter phone: ";
 	cin>>input;
 	newPas.setPhone(input);
+	input.clear();
 
 	list.insertNode(newPas);
 }
