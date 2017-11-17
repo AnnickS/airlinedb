@@ -7,6 +7,8 @@
 //============================================================================
 
 #include <iostream>
+#include <algorithm>
+#include <array>
 #include "Passenger.h"
 #include "LinkedList.h"
 #include "OrderedLinkedList.h"
@@ -201,18 +203,18 @@ void addPas(OrderedLinkedList<Passenger>& list){
 
 	cout<<"Enter first name: ";
 	cin>>input;
-	/*if(std::any_of(input.begin(), input.end(), ::isdigit)){
+	if(std::any_of(input.begin(), input.end(), ::isdigit)){
 		cout<<"Invalid input."<<endl;
 		return;
-	}*/
+	}
 	newPas.setFirst(input);
 
 	cout<<"Enter last name: ";
 	cin>>input;
-	/*if(std::any_of(input.begin(), input.end(), ::isdigit)){
+	if(std::any_of(input.begin(), input.end(), ::isdigit)){
 		cout<<"Invalid input."<<endl;
 		return;
-	}*/
+	}
 	newPas.setLast(input);
 	input.clear();
 	cin.ignore(1000, '\n');

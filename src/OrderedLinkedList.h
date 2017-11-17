@@ -81,20 +81,29 @@ void OrderedLinkedList<T>::deleteNode(T& item){
 	if(this->count == 0){
 		cout<<"Item does not exist."<<endl;
 	}
+	else if((this->head->data == item) && (this->count == 1)){
+		this->head = NULL;
+		this->last = NULL;
+		delete p;
+		this->count--;
+	}
 	else if(this->head->data == item){
-		this->head = p->next;
+		this->head = this->head->next;
 		delete p;
 		this->count--;
 	}
 	else{
-		for(int i = 0; i < this->count-1; i++){
+		for(int i = 0; i < this->count; i++){
 			if(p->next->data == item){
+				if(i == this->count-1){
+					this->last = p;
+				}
 				node<T>* temp = p->next;
 				p->next = p->next->next;
 				delete temp;
 				this->count--;
 			}
-			else if(i == this->count -1){
+			else if(i == this->count-1){
 				cout<<"Item does not exist."<<endl;
 			}
 		}
