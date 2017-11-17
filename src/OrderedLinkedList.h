@@ -66,6 +66,7 @@ void OrderedLinkedList<T>::insertNode(T& item){
 				p->next = temp->next;
 				temp->next = p;
 				this->count++;
+				break;
 			}
 			else
 				temp = temp->next;
