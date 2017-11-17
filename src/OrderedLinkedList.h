@@ -44,6 +44,7 @@ void OrderedLinkedList<T>::insertNode(T& item){
 
 	if(this->count == 0){
 		this->head = p;
+		this->last = p;
 		this->count++;
 	}
 	else if(item <= this->head->data){
@@ -51,16 +52,17 @@ void OrderedLinkedList<T>::insertNode(T& item){
 		this->head = p;
 		this->count++;
 	}
-	else if(item >= this->last->data){
+	else if(item > this->last->data){
 		this->last->next = p;
 		this->last = p;
 		this->count++;
 	}
 	else{
 		node<T>* temp = this->head;
-		for(int i = 0; i < this->count-1; i++){
-			if((temp->next->data >= item) &&
-					(temp->data < item)){
+
+		for(int i = 0; i < this->count; i++){
+			if((temp->next->data > item) &&
+					(temp->data <= item)){
 				p->next = temp->next;
 				temp->next = p;
 				this->count++;
