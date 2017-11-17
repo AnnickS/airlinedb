@@ -29,7 +29,7 @@ class LinkedList{
 		void insertFirst(T& item);
 //		T back();
 //		T front();
-		virtual T& search(T& item);
+		virtual T* search(T& item);
 		void insertLast(T& item);
 		virtual void deleteNode(T& item);
 		virtual void destroy();
@@ -71,17 +71,19 @@ void LinkedList<T>::insertLast(T& item){
 	count++;
 }
 template<class T>
-T& LinkedList<T>::search(T& item){
+T* LinkedList<T>::search(T& item){
 	node<T>* p = head;
 
 	for(int i = 0; i < count; i++){
 		if(p->data == item){
-			return p->data;
+			return &(p->data);
 		}
 		else
 			p = p->next;
 	}
+	return NULL;
 }
+
 template<class T>
 void LinkedList<T>::deleteNode(T& item){
 	/*if((head == last) && (head->data = item)){

@@ -38,9 +38,8 @@ void mainMenu(){
 	string first;
 	string last;
 	Passenger pasSearch;
-	Passenger pasFound;
+	Passenger* pasFound;
 	int flightNum = 0;
-	Passenger nullObject;
 
 	cout<<"A(Add) | S (Search) | D(Delete) |L(List) |Q(Quit):"<<endl;
 	cin>>input;
@@ -83,76 +82,80 @@ void mainMenu(){
 
 			pasFound = one.search(pasSearch);
 
-			if(pasFound != nullObject){
+			if(pasFound != NULL){
 				flightNum = 100;
-				break;
 			} else
 			{
 				pasFound = two.search(pasSearch);
-			}
-			if((pasFound != nullObject) && (flightNum == 0)){
-				flightNum = 200;
-				break;
-			} else{
-				pasFound = three.search(pasSearch);
-			}
-			if(pasFound != nullObject && flightNum == 0){
-				flightNum = 300;
-				break;
-			} else{
-				pasFound = four.search(pasSearch);
-				flightNum = 400;
+
+				if(pasFound != NULL){
+					flightNum = 200;
+				}
+				else{
+					pasFound = three.search(pasSearch);
+
+					if(pasFound != NULL){
+						flightNum = 300;
+					}
+					else{
+						pasFound = four.search(pasSearch);
+
+						if(pasFound != NULL){
+							flightNum = 400;
+						}
+					}
+				}
 			}
 
-			if(pasFound == nullObject){
+			if(pasFound == NULL){
 				cout<<"Cannot find passenger on any flight.";
 			}
 			else{
 				cout<<"Flight Number: "<<flightNum<<endl;
-				pasFound.printPas();
+				pasFound->printPas();
 			}
 
 			first.clear();
 			last.clear();
 
 			break;
-		case 'D':
-		case 'd':
-			cout<<"Enter flight number: ";
-			cin>>flight;
-			if(flight != "100" && flight != "200" && flight != "300"
-					&& flight != "400"){
-				cout<<"Invalid input."<<endl;
-
-				flight.clear();
-				break;
-			}
-			else{
-				cout<<"Enter first name: ";
-				cin>>first;
-				cout<<"Enter last name: ";
-				cin>>last;
-
-				Passenger pas;
-				pas.setFirst(first);
-				pas.setLast(last);
-
-				if(flight == "100"){
-					one.deleteNode(pas);
-				}
-				else if(flight == "200"){
-					two.deleteNode(pas);
-				}
-				else if(flight == "300"){
-					three.deleteNode(pas);
-				}
-				else if(flight == "400"){
-					four.deleteNode(pas);
-				}
-
-				flight.clear();
-				break;
-			}
+//		case 'D':
+//		case 'd':
+//			cout<<"Enter flight number: ";
+//			cin>>flight;
+//			if(flight != "100" && flight != "200" && flight != "300"
+//					&& flight != "400"){
+//				cout<<"Invalid input."<<endl;
+//
+//				flight.clear();
+//				break;
+//			}
+//			else{
+//				cout<<"Enter first name: ";
+//				cin>>first;
+//				cout<<"Enter last name: ";
+//				cin>>last;
+//
+//				Passenger pas;
+//				pas.setFirst(first);
+//				pas.setLast(last);
+//
+//				if(flight == "100"){
+//					one.deleteNode(pas);
+//				}
+//				else if(flight == "200"){
+//					two.deleteNode(pas);
+//				}
+//				else if(flight == "300"){
+//					three.deleteNode(pas);
+//				}
+//				else if(flight == "400"){
+//					four.deleteNode(pas);
+//				}
+//
+//				flight.clear();
+//				break;
+//			}
 		case 'L':
 		case 'l':
 			cout<<"Enter flight number: ";
@@ -207,7 +210,6 @@ void addPas(OrderedLinkedList<Passenger>& list){
 		return;
 	}*/
 	newPas.setFirst(input);
-	input.clear();
 
 	cout<<"Enter last name: ";
 	cin>>input;
@@ -217,16 +219,14 @@ void addPas(OrderedLinkedList<Passenger>& list){
 	}*/
 	newPas.setLast(input);
 	input.clear();
-
 	cout<<"Enter address: ";
-	cin>>input;
+	cin.ignore(1000, '\n');
+	getline(cin, input);
 	newPas.setAddress(input);
-	input.clear();
 
 	cout<<"Enter phone: ";
 	cin>>input;
 	newPas.setPhone(input);
-	input.clear();
 
 	list.insertNode(newPas);
 }

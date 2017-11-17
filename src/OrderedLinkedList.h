@@ -14,37 +14,39 @@ template<class T>
 class OrderedLinkedList: public LinkedList<T>{
 public:
 	OrderedLinkedList(){}
-	T& search(T& item) override;
+	T* search(T& item) override;
 	void insertNode(T& item);
 	void deleteNode(T& item);
 	void listNodes();
 };
 
 template<class T>
-T& OrderedLinkedList<T>::search(T& item){
+T* OrderedLinkedList<T>::search(T& item){
 	node<T>* p = this->head;
+
 	for(int i = 0; i < this->count; i++){
 		if(p->data > item){
 			break;
 		}if(p->data == item){
-			return p->data;
+			return &(p->data);
 		}
 		else
 			p = p->next;
 	}
-	return p->data;
+
+	return NULL;
 }
 
 template<class T>
 void OrderedLinkedList<T>::insertNode(T& item){
-	node<T>* p;
+	node<T>* p = new node<T>();
 	p->data = item;
 
 	if(this->count == 0){
 		this->head = p;
 		this->count++;
 	}
-	if(item <= this->head->data){
+	else if(item <= this->head->data){
 		p->next = this->head;
 		this->head = p;
 		this->count++;
